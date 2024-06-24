@@ -6,7 +6,7 @@ window.geometry("400x400")
 window.title("Will it float?")
 
 # Create labels
-body_label = ctk.CTkLabel(window, text="Body", font=("Calibri", 24))
+body_label = ctk.CTkLabel(window, text="Select Body", font=("Calibri", 24))
 
 class Body:
     def __init__(self, name, type, mass, xDimension, yDimension, zDimension):
