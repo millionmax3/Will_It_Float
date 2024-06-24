@@ -58,7 +58,7 @@ def check_if_float():
 
 # Create dropdown boxes
 bodies = ["Sphere", "Cube", "Prism", "Pyramid"]
-body_type_select = ctk.CTkComboBox(display_window, values=bodies)
+body_type_select = ctk.CTkComboBox(display_window, placeholder_text="Select Body", values=bodies)
 selected_body = body_type_select.get()
 
 # Create widgets for user to enter data into
