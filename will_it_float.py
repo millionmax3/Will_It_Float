@@ -7,7 +7,7 @@ ctk.set_default_color_theme("dark-blue")
 
 # Create window
 display_window = ctk.CTk()
-display_window.geometry("400x400")
+display_window.geometry("600x500")
 display_window.title("Will it float?")
 
 gravity = 9.81
@@ -51,22 +51,30 @@ answer_label.grid(row=3, column=1, padx=20, pady=20)
 
 # Checks if object floats or not
 def check_if_float():
-    if 1 > 0:
-        answer_label.configure(text="The object floats!")
-    else:
-        answer_label.configure(text="The object sinks!")
+        answer_label.configure(text=enter_mass.get())
+
 
 # Create dropdown boxes
 bodies = ["Sphere", "Cube", "Prism", "Pyramid"]
-body_type_select = ctk.CTkComboBox(display_window, placeholder_text="Select Body", values=bodies)
+body_type_select = ctk.CTkOptionMenu(display_window, values=bodies)
+body_type_select.grid(row=1, column=2, padx=20, pady=20)
 selected_body = body_type_select.get()
 
 # Create widgets for user to enter data into
-enter_mass = ctk.Entry(display_window, placeholder_text="Enter mass of body:")
-enter_xValue = ctk.Entry(display_window, placeholder_text="Enter X dimension of body", state=DISABLED)
-enter_yValue = ctk.Entry(display_window, placeholder_text="Enter Y dimension of body", state=DISABLED)
-enter_zValue = ctk.Entry(display_window, placeholder_text="Enter Z dimension of body", state=DISABLED)
+enter_mass = ctk.CTkEntry(display_window, placeholder_text="Enter mass of body:", width=200)
+enter_mass.grid(row=2, column=2, padx=20, pady=20)
 
-finish_button = ctk.Button(display_window, text="Submit", command=check_if_float())
+enter_xValue = ctk.CTkEntry(display_window, placeholder_text="Enter X dimension of body", width=200)
+enter_xValue.grid(row=3, column=2, padx=20, pady=20)
+
+enter_yValue = ctk.CTkEntry(display_window, placeholder_text="Enter Y dimension of body", width=200)
+enter_yValue.grid(row=4, column=2, padx=20, pady=20)
+
+enter_zValue = ctk.CTkEntry(display_window, placeholder_text="Enter Z dimension of body", width=200)
+enter_zValue.grid(row=5, column=2, padx=20, pady=20)
+
+# Submit button
+finish_button = ctk.CTkButton(display_window, text="Submit", font=("Calibri", 36), command=check_if_float())
+finish_button.grid(row=6, column=2, padx=20, pady=20)
 
 display_window.mainloop()
