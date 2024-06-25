@@ -26,9 +26,10 @@ class Body:
             return volume
    
 class Fluid:
-    def __init__(self, name, density):
-        self.name = name
+    def __init__(self, type, density):
+        self.type = type
         self.density = density
+
 
 # Create dropdown boxes
 bodies = ["Sphere", "Cube", "Prism", "Pyramid"]
@@ -58,12 +59,19 @@ enter_zValue.grid(row=6, column=2, padx=20, pady=20)
 enter_density = ctk.CTkEntry(display_window, placeholder_text="Enter density of fluid (kg/m3):", width=200)
 enter_density.grid(row=2, column=3, padx=20, pady=20)
 
-# Create body from values
-created_object = Body(enter_nameOfBody.get(), body_type_select.get(), enter_mass.get(), enter_xValue.get(), enter_yValue.get(), enter_zValue.get())
-
 # Checks if object floats or not
 def check_if_float():
-        answer_label.configure(text=f"The volume of the object is {str(created_object.calculate_volume())}")
+        # Create objects from user inputs
+        created_object = Body(enter_nameOfBody.get(), body_type_select.get(), float(enter_mass.get()), float(enter_xValue.get()), float(enter_yValue.get()), float(enter_zValue.get()))
+        created_fluid = Fluid(fluid_type_select.get(), float(enter_density.get()))
+        # Determine buoyancy force
+        buoyancy = created_fluid.density * created_object.calculate_volume() * gravity
+        # Determine weight force
+        weight = created_object.mass * gravity
+        if buoyancy >= weight:
+             answer_label.configure(text=f"The object floats!")
+        else:
+             answer_label.configure(text=f"The object sinks!")
 
 # Submit button
 finish_button = ctk.CTkButton(display_window, text="Submit", font=("Calibri", 36), command=check_if_float)
